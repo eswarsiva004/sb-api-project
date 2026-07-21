@@ -71,7 +71,7 @@ jobs:
           # docker container run -d -p 8080:8080 -e APP_ENVIRONMENT="$ENV_LABEL" ${{env.REGISTRY}}/${{env}}
 
     deploy_production:
-      name: Deploy to Staging
+      name: Deploy to Production
       needs: build_and_push
       runs-on: ubuntu-latest
       environment:
