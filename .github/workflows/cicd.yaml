@@ -69,19 +69,3 @@ jobs:
         run: |
           echo "Deploying to the staging server with environment ${ENV_LABEL} and tag ${IMAGE_TAG}"
           # docker container run -d -p 8080:8080 -e APP_ENVIRONMENT="$ENV_LABEL" ${{env.REGISTRY}}/${{env}}
-
-    deploy_production:
-      name: Deploy to Production
-      needs: build_and_push
-      runs-on: ubuntu-latest
-      environment:
-        name: production
-        url: https://company.com
-      steps:
-        - name: Deploy the image to the staging
-          env:
-            ENV_LABEL: ${{secrets.STAGING_LABEL}}
-            IMAGE_TAG: sha-${{github.sha}}
-          run: |
-            echo "Deploying to the staging server with environment ${ENV_LABEL} and tag ${IMAGE_TAG}"
-            # docker container run -d -p 8080:8080 -e APP_ENVIRONMENT="$ENV_LABEL" ${{env.REGISTRY}}/${{env}}
