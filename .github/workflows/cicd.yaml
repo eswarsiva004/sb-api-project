@@ -47,6 +47,7 @@ jobs:
             type=raw,value=latest
 
       - name: Build and push the docker image
+        id: push-step
         uses: docker/build-push-action@v6
         with:
           context: .
@@ -56,7 +57,7 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
-      - name: Build Provenance Attestation
+      - name: Build provenance attestation
         uses: actions/attest-build-provenance@v2
         with:
           subject-name: ${{env.REGISTRY}}/${{env.IMAGE_NAME}}
@@ -69,7 +70,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: staging
-      url: https://company-stage.com
+      url: https://company.com
     steps:
       - name: Deploy the image to the staging
         env:
@@ -78,3 +79,8 @@ jobs:
         run: |
           echo "Deploying to the staging server with environment ${ENV_LABEL} and tag ${IMAGE_TAG}"
           # docker container run -d -p 8080:8080 -e APP_ENVIRONMENT="$ENV_LABEL" ${{env.REGISTRY}}/${{env}}
+
+# The *** symbols appear in your logs because of GitHub Actions' built-in secret masking.
+# GitHub automatically scans your pipeline logs. If it detects any text that matches
+# the exact value of a repository secret, it intercepts the output and replaces it with
+# asterisks (***) to protect sensitive information from being exposed.
