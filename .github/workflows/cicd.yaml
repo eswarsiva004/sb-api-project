@@ -72,7 +72,7 @@ jobs:
       name: staging
       url: https://company.com
     steps:
-      - name: Deploy the image to the staging
+      - name: Deploy the image to the staging.
         env:
           ENV_LABEL: ${{secrets.STAGING_LABEL}}
           IMAGE_TAG: sha-${{github.sha}}
