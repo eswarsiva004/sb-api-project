@@ -1,4 +1,4 @@
-# build, dockerize, and push
+# build, dockerize, and push.
 
 name: Spring Boot Application Multi-Environment Dockerizing
 
